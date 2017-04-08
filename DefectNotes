@@ -1,0 +1,21 @@
+
+Notes of possible defects to be addressed later.
+
+__________________________________________________________________________________________
+
+Exception upon startup:  
+java.io.FileNotFoundException: mathgraphics.properties (The system cannot find the file specified)
+
+"Displayed" is mis-spelled on GUI
+
+"Theta" is mis-spelled on GUI
+
+Arrow L,R not working as well as up/down. When you press L or R, it doesn't move very far at all, it seems too sensitive; U or D moves further.  I wonder if this is just the window sizing.  (may not cause any problems)
+  
+Mouse wheel up/down is reversed (this may not be a problem, perhaps preference).  
+
+Coordinates missing from 3D view, they show for both 2D graphs.  
+
+Visualizer.java mis-spelled variable (Cosmetic) :   
+public static int BUTTOMBORDER=100;
+
