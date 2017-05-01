@@ -338,7 +338,7 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 			up.setBounds(0,0,LEFTBORDER+WIDTH+RIGHTBORDER,UPBORDER);
 			
 			add(up);
-			JLabel flabel = new JLabel("Displayed function: r(teta)=");
+			JLabel flabel = new JLabel("Displayed function: r(theta)=");
 			flabel.setBounds(5,5,160,20);
 			up.add(flabel);
 			
@@ -508,7 +508,7 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 			rlabel.setBounds(5,60,100,20);
 			right.add(rlabel);
 			
-			JLabel alabel = new JLabel("teta1:");
+			JLabel alabel = new JLabel("theta1:");
 			alabel.setBounds(5,90,40,20);
 			right.add(alabel);
 			
@@ -518,7 +518,7 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 			displayedA.setBounds(50,90,60,20);
 			right.add(displayedA);
 		
-			JLabel blabel = new JLabel("teta2:");
+			JLabel blabel = new JLabel("theta2:");
 			blabel.setBounds(5,120,40,20);
 			right.add(blabel);
 			add(right);
