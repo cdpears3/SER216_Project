@@ -5,7 +5,13 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.PlainDocument;
 
-
+/**
+ * Creates the text field for function entry
+ * 
+ * @author Group 12
+ * @version 2.1
+ *
+ */
 public class FunctionTextField extends JTextField{
 
 	
