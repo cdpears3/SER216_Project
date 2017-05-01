@@ -1,6 +1,13 @@
 package com.main;
 
-
+/**
+ * This class runs the mathgraphics program by creating a 
+ * visualizer object
+ * 
+ * @author Group 12
+ * @version 1.0 5/1/2017
+ *
+ */
 public class Main {
 
 	public static void main(String[] args) {
