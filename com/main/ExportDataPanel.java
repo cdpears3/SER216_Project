@@ -13,6 +13,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * Builds the Export Data window
+ * @author Group 12
+ * @version 2.1
+ *
+ */
 public class ExportDataPanel extends JDialog implements ActionListener{
 	
 	int HEIGHT=200;
