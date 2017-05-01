@@ -45,7 +45,7 @@ public class Renderer3D {
 	double s2=Math.sqrt(2);
 	
 	public double lightAngleFi=fi;
-	public double lightAngleTeta=Math.PI/2-0.3;
+	public double lightAngleTheta=Math.PI/2-0.3;
 	
 	
 	public Point3D pAsso;
@@ -705,11 +705,11 @@ public class Renderer3D {
 	public void translateLight(int i, int j) {
 		
 		lightAngleFi+=0.1*i;
-		lightAngleTeta+=0.1*j;
-		if(lightAngleTeta<0)
-			lightAngleTeta=0;
-		else if(lightAngleTeta>Math.PI)
-			lightAngleTeta=Math.PI;
+		lightAngleTheta+=0.1*j;
+		if(lightAngleTheta<0)
+			lightAngleTheta=0;
+		else if(lightAngleTheta>Math.PI)
+			lightAngleTheta=Math.PI;
 		
 		setLight();
 		
@@ -717,7 +717,7 @@ public class Renderer3D {
 	
 	public void setLight(){
 		
-		pLight=new Point3D(Math.cos(lightAngleFi)*Math.sin(lightAngleTeta),-Math.cos(lightAngleTeta),-Math.sin(lightAngleFi)*Math.sin(lightAngleTeta));
+		pLight=new Point3D(Math.cos(lightAngleFi)*Math.sin(lightAngleTheta),-Math.cos(lightAngleTheta),-Math.sin(lightAngleFi)*Math.sin(lightAngleTheta));
 	}
 	
 	public void changeLightIntensity(double di){
@@ -736,37 +736,37 @@ public class Renderer3D {
 		
 	}
 	
-	public double[][] getRotationMatrix(Point3D versor,double teta){
+	public double[][] getRotationMatrix(Point3D versor,double theta){
 
-		return getRotationMatrix(versor.x,versor.y,versor.z,teta);
+		return getRotationMatrix(versor.x,versor.y,versor.z,theta);
 	}
 
 	/**
 	 * 
 	 * 
-	 *  ROTATION MATRIX OF TETA AROUND (X,Y,Z) AXIS
+	 *  ROTATION MATRIX OF THETA AROUND (X,Y,Z) AXIS
 	 * 
 	 * @param x
 	 * @param y
 	 * @param z
-	 * @param teta
+	 * @param theta
 	 * @return
 	 */
 
 
 
-	public double[][] getRotationMatrix(double x,double y,double z,double teta){
+	public double[][] getRotationMatrix(double x,double y,double z,double theta){
 
 		double[][] matrix=new double[3][3];
-		matrix[0][0]=Math.cos(teta)+x*x*(1.0-Math.cos(teta));
-		matrix[0][1]=y*x*(1.0-Math.cos(teta))-z*Math.sin(teta);
-		matrix[0][2]=z*x*(1.0-Math.cos(teta))+y*Math.sin(teta);
-		matrix[1][0]=y*x*(1.0-Math.cos(teta))+z*Math.sin(teta);
-		matrix[1][1]=Math.cos(teta)+y*y*(1.0-Math.cos(teta));
-		matrix[1][2]=z*y*(1.0-Math.cos(teta))-x*Math.sin(teta);
-		matrix[2][0]=z*x*(1.0-Math.cos(teta))-y*Math.sin(teta);
-		matrix[2][1]=z*y*(1.0-Math.cos(teta))+x*Math.sin(teta);
-		matrix[2][2]=Math.cos(teta)+z*z*(1.0-Math.cos(teta));
+		matrix[0][0]=Math.cos(theta)+x*x*(1.0-Math.cos(theta));
+		matrix[0][1]=y*x*(1.0-Math.cos(theta))-z*Math.sin(theta);
+		matrix[0][2]=z*x*(1.0-Math.cos(theta))+y*Math.sin(theta);
+		matrix[1][0]=y*x*(1.0-Math.cos(theta))+z*Math.sin(theta);
+		matrix[1][1]=Math.cos(theta)+y*y*(1.0-Math.cos(theta));
+		matrix[1][2]=z*y*(1.0-Math.cos(theta))-x*Math.sin(theta);
+		matrix[2][0]=z*x*(1.0-Math.cos(theta))-y*Math.sin(theta);
+		matrix[2][1]=z*y*(1.0-Math.cos(theta))+x*Math.sin(theta);
+		matrix[2][2]=Math.cos(theta)+z*z*(1.0-Math.cos(theta));
 		return matrix;
 	} 
 
