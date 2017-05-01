@@ -9,7 +9,12 @@ import javax.swing.tree.TreeNode;
 
 import org.w3c.dom.Node;
 
-
+/**
+ * MathTree class, responsible for MathTree String operations.
+ * 
+ * @author Group 12
+ * @version 2.1 5/01/2017
+ */
 public class MathTree {
 
 	TNode root=null;
@@ -26,6 +31,11 @@ public class MathTree {
 	public String[] FUNCTIONS={"","SQRT","SIN","COS","TAN","EXP","LOG","LN","ABS","ASIN","ACOS","ATAN","SINH","COSH","TANH"};
 
 
+	/**
+	 * Main method for MathTree testing operations.
+	 * 
+	 * @param args Required for main method.
+	 */
 	public static void main(String[] args) {
 
 		MathTree te=new MathTree();
@@ -44,26 +54,48 @@ public class MathTree {
 
 
 
+	/**
+	 * MathTree default constructor.
+	 */
 	public MathTree() {
 		super();
 	}
 
 
+	/**
+	 * MathTree constructor with a String.
+	 * 
+	 * @param words The String to construct a MathTree object with.
+	 */
 	public MathTree(String words) {
 		buildStringTree(words);
 	}
 
+	
+	/**
+	 * Evaluate a MathTree string.
+	 * 
+	 * @param x
+	 * @param y
+	 * @return sum The result.
+	 */
 	public double evaluate(double x,double y) {
 
 		double sum=evaluate(root,x,y);	
 
-		
-
 		return sum;
 	}
 
+	
+	/**
+	 * Evaluate a MathTree string.
+	 * 
+	 * @param node the TNode.
+	 * @param x
+	 * @param y
+	 * @return sum The result.
+	 */
 	public double evaluate(TNode node,double x,double y) {
-
 
 		double val=0;
 
@@ -85,12 +117,9 @@ public class MathTree {
 		}	
 		else{
 
-
 			if(node.getLabel().equals(SUM_LABEL)){
 
 				val=0;
-
-
 
 				TNode child0 = node.getChildAt(0);
 				TNode child1 = node.getChildAt(1);
@@ -227,12 +256,22 @@ public class MathTree {
 
 	}
 
+	
+	/**
+	 * Print the MathTree object
+	 */
 	public void printTree() {
 
 		//root.printTree();
 		printBranchesWithLabel(root);
 	}
 
+	
+	/**
+	 * Build the math tree from a string.
+	 * 
+	 * @param words The input string.
+	 */
 	public void buildStringTree(String words) {
 
 		root=new TNode();
@@ -246,8 +285,13 @@ public class MathTree {
 		buildStringTree(root);
 	}
 
+	
+	/**
+	 * Build the math tree at a TNode.
+	 * 
+	 * @param node The input TNode object.
+	 */
 	public void buildStringTree(TNode node) {
-
 
 		String value=(String)node.getValue();
 
@@ -263,15 +307,12 @@ public class MathTree {
 		}
 		else if(value.indexOf(SUM_LABEL)>=0 && canDecomposeBySymbol(value,SUM_LABEL)) {
 
-
 			node.setLabel(SUM_LABEL);
 			Vector tokens=decomposeBySymbol(value,SUM_LABEL);
 			appendChildren(node,tokens);
 
-
 		}
 		else if(value.indexOf(SUBTRACTION_LABEL)>=0 && canDecomposeBySymbol(value,SUBTRACTION_LABEL)) {
-
 
 			node.setLabel(SUBTRACTION_LABEL);
 			Vector tokens=decomposeBySymbol(value,SUBTRACTION_LABEL);
@@ -300,8 +341,14 @@ public class MathTree {
 		}
 	}
 
+	
+	/**
+	 * Evaluates a function from String.
+	 * 
+	 * @param value The input string function.
+	 * @return function The string result function.
+	 */
 	public String evaluateFunction(String value) { 
-
 
 		int depth=1;
 		boolean isFunction=true;
@@ -323,9 +370,7 @@ public class MathTree {
 
 		for(int i=function.length()+1;i<value.length()-1;i++){
 
-
 			char ch=value.charAt(i);
-
 
 			if(ch=='('){
 
@@ -348,6 +393,13 @@ public class MathTree {
 
 	}
 
+	
+	/**
+	 * Append a TNode child.
+	 * 
+	 * @param node The input TNode.
+	 * @param tokens The input vector.
+	 */
 	public void appendChildren(TNode node, Vector tokens) {
 
 		for (int i = 0; i < tokens.size(); i++) {
@@ -365,18 +417,20 @@ public class MathTree {
 	}
 
 
-
+	/**
+	 * Determines if the function is decomposable by symbol.
+	 * 
+	 * @param value The value String.
+	 * @param symbol The symbol String.
+	 * @return The boolean result.
+	 */
 	public boolean canDecomposeBySymbol(String value, String symbol) {
-
-
 
 		int depth=0;
 
 		for(int i=0;i<value.length();i++){
 
-
 			char ch=value.charAt(i);
-
 
 			if(ch==symbol.charAt(0) && depth==0){
 				
@@ -400,6 +454,14 @@ public class MathTree {
 		return false;
 	}
 
+	
+	/**
+	 * Decompose by symbol.
+	 * 
+	 * @param value The value String.
+	 * @param symbol The symbol String.
+	 * @return tokens The vector result.
+	 */
 	public Vector decomposeBySymbol(String value, String symbol) {
 		Vector tokens=new Vector();
 
@@ -408,9 +470,7 @@ public class MathTree {
 
 		for(int i=0;i<value.length();i++){
 
-
 			char ch=value.charAt(i);
-
 
 			if(ch==symbol.charAt(0) && depth==0)
 			{
@@ -438,6 +498,12 @@ public class MathTree {
 
 	}
 
+	
+	/**
+	 * Prints the Branches with the label, from the root TNode.
+	 * 
+	 * @param root The TNode root.
+	 */
 	public void printBranchesWithLabel(TNode root) {
 
 		if(root.getChildCount()==0)
@@ -464,18 +530,22 @@ public class MathTree {
 			System.out.println();
 		}
 
-
-
 		for (int i = 0; i <   root.getChildCount(); i++) {
 
 			TNode child = root.getChildAt(i);
 			printBranchesWithLabel(child);
 
-
 		}
 
 	}
 
+	
+	/**
+	 * Formats a double value.  Sets fraction digits.
+	 * 
+	 * @param numb The input double to format.
+	 * @return pow The resulting string after formatting.
+	 */
 	public static String formatVal(double numb){
 		
 		String pow="";

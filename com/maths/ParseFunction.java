@@ -4,7 +4,12 @@ import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Vector;
 
-
+/**
+ * ParseFunction class, responsible for parsing math function strings.
+ * 
+ * @author Group 12
+ * @version 2.1 5/01/2017
+ */
 public class ParseFunction {
 	
 	public static final String SIN="sin";
@@ -24,17 +29,26 @@ public class ParseFunction {
 	public String function="";
 	
 	public Vector recordedFunctions=new Vector();
-	
-		
+			
 	public static String[] FZ={"(",SIN+"(",COS+"(",TAN+"(",LOG+"(",EXP+"(",
 		ASIN+"(",ACOS+"(",ATAN+"(",
 		SINH+"(",COSH+"(",TANH+"(",ABS+"(",SQRT+"("
 	};
-
-	public static void main(String[] args) {
-		
 	
-		
+	public static final char X='x';
+	public static final char MULTIPLY='*';
+	public static final char SUM='+';
+	public static final char MINUS='-';
+	public static final char DIVIDE='/';
+	public static final char POWER='^';
+
+	
+	/**
+	 * Main method for testing parse function behavior.
+	 * 
+	 * @param args Required for main method.
+	 */
+	public static void main(String[] args) {
 		
 		ParseFunction dc=new ParseFunction();
 		String sfunction="2*(2+3*(1.0+1))+(5+6*(1-2/(1+1)))-1";
@@ -42,14 +56,18 @@ public class ParseFunction {
 		sfunction="2*-2";
 		
 		dc.setFunction(sfunction);
-		    
 	   
 		System.out.println( dc.parseFunction());
 			//System.out.println(1+Math.sin(3+4*Math.cos(3)));
-	
 		
 	}
 	
+	
+	/**
+	 * Calculates the function string.
+	 * 
+	 * @return result The calculated result as a double.
+	 */
 	public double parseFunction() {
 		
 		
@@ -62,14 +80,15 @@ public class ParseFunction {
 		return result;
 	}
 
+	
+	
 	/**
-	 * @param function
+	 * Decomposes the function string.
 	 */
 	private void decomposeFunction()  {
 
 		String text="";
 		int indx0=-1;
-
 
 		//System.out.println("statFunction:"+function);
 
@@ -100,17 +119,15 @@ public class ParseFunction {
 					let==MINUS || let==SUM ||let==' ' ) 
 				text="";
 
-
-
 		}  
 		if(isDecomposable(function))
 			decomposeFunction();
-
-
-
-
 	}
 	
+	
+	/**
+	 * Decomposes the function string with a register.
+	 */
 	private void decomposeFunctionWithRegister()  {
 		
 		String text="";
@@ -128,14 +145,16 @@ public class ParseFunction {
 			function=replaceFunction(function,indx0, indx1);
 		
 		}  
-		
-	
-		
+
 	}
 
+
 	/**
+	 * Replaces a function within the specified indexes of a string.
 	 * @param text
-	 * @param fz2
+	 * @param indx0
+	 * @param end
+	 * @return
 	 */
 	private String replaceFunction(String text, int indx0,int end) {
 		
@@ -145,9 +164,6 @@ public class ParseFunction {
 		String function_name=text.substring(indx0,indxOpen);
 		String argument=text.substring(indxOpen+1,end);
 		
-
-		
-		
 		//System.out.println("f:"+function_name);
 		//System.out.println("argument:"+argument);
 		
@@ -155,12 +171,19 @@ public class ParseFunction {
 		val=calculateParentheses(argument); 
 		
 		val=calculateFunction( val,function_name);
-		
-					
+							
 		return text.substring(0,indx0)+formatVal(val)+text.substring(end+1);
 		
 	}
 	
+	
+	/**
+	 * Calculates the function.
+	 * 
+	 * @param val
+	 * @param fz
+	 * @return result
+	 */
 	private double calculateFunction(double val,String fz){
 		
 		double result=val;
@@ -182,21 +205,33 @@ public class ParseFunction {
 		return result;
 	}
 	
+	
+	/**
+	 * Formats an input double value. Uses maximum fraction digits of 6.
+	 * 
+	 * @param numb The input double to format.
+	 * @return pow The resulting double after formatting.
+	 */
 	public static String formatVal(double numb){
 		
 		String pow="";
-		
-			
+					
 		NumberFormat df =NumberFormat.getInstance(Locale.US);
 		df.setMaximumFractionDigits(6);
 		df.setGroupingUsed(false);
 		pow=df.format(numb);
 		
 		return pow;
-	
-	
+		
 	}
 	
+	
+	/**
+	 * Determines if the input function string is decomposable.
+	 * 
+	 * @param function
+	 * @return
+	 */
 	private boolean isDecomposable(String function){
 		
 		if(function.indexOf("(")>=0) return true;
@@ -205,35 +240,26 @@ public class ParseFunction {
 	}
 
 
-
-	public static final char X='x';
-	public static final char MULTIPLY='*';
-	public static final char SUM='+';
-	public static final char MINUS='-';
-	public static final char DIVIDE='/';
-	public static final char POWER='^';
-	
-
-
 	/**
+	 * Calculates parentheses from an input string.
 	 * @param molt
-	 * @return
+	 * @return result
 	 */
-	
 	private double calculateParentheses(String molt) {
-		
-		
+				
 		int indx=0;
 		if(molt.length()==0) return 0;
 		//molt=molt.replaceAll(" ","");
 		return calculateArgument(molt);
-		
-		
+				
 	}	
 
+	
 	/**
+	 * Simplifies the powers
+	 * 
 	 * @param molt
-	 * @return
+	 * @return result
 	 */
 	private String simplifyPowers(String molt) {
 		
@@ -249,8 +275,7 @@ public class ParseFunction {
 		  	prev=Math.max(prev,molt.lastIndexOf(MINUS,indx));
           
           int next=molt.length();
-                
-		 
+                		 
           if(molt.indexOf(SUM,indx)>0)next=Math.min(next,molt.indexOf(SUM,indx));
 		  if(molt.indexOf(MULTIPLY,indx)>0)next=Math.min(next,molt.indexOf(MULTIPLY,indx));
 		  if(molt.indexOf(DIVIDE,indx)>0)next=Math.min(next,molt.indexOf(DIVIDE,indx));
@@ -258,34 +283,27 @@ public class ParseFunction {
 		  if(molt.indexOf(MINUS,indx)>0)
 		  	if(molt.indexOf(MINUS,indx)>indx+1)
 		  	next=Math.min(next,molt.indexOf(MINUS,indx));
-		 
-		  
-     
-                        
+		                         
           double base=Double.parseDouble(molt.substring(prev+1,indx));
           
           double exp=Double.parseDouble(molt.substring(indx+1,next));
           
 		  double val=Math.pow(base,exp);
-		  
-		 
-          
+		            
           molt=molt.substring(0,prev+1)+formatVal(val)+molt.substring(next);
           
           //System.out.println(molt);
         
         }
-		
-		
-				
 		return molt;
 	}
 
 	/**
+	 * CalculateArgument
+	 * 
 	 * @param molt
 	 * @return
 	 */
-	
 	private double calculateArgument(String molt) {
 		
 		char signum=MULTIPLY;
@@ -336,17 +354,16 @@ public class ParseFunction {
 
 
 
-
 	/**
+	 * AddValue
+	 * 
 	 * @param result
 	 * @param signum
 	 * @param partial
 	 * @return
 	 */
 	private double addValue(double result, char signum, double partial) {
-		
-		
-		
+				
 		if(signum==MULTIPLY)
 			result*=partial;
 		else if(signum==DIVIDE)
@@ -360,16 +377,23 @@ public class ParseFunction {
 	}
 
 
+	/**
+	 * Getter for the function String.
+	 * 
+	 * @return function The function String.
+	 */
 	public String getFunction() {
 		return function;
 	}
 
+	
+	/**
+	 * Setter for the function String.
+	 * 
+	 * @param function The function String to set.
+	 */
 	public void setFunction(String function) {
 		this.function = function;
 	}
-
-
-
-
 
 }

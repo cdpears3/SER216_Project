@@ -1,12 +1,22 @@
 package com.maths;
 
+/**
+ * Advanced Calculator class, responsible for calculating integrals via various methods.
+ * 
+ * @author Group 12
+ * @version 2.1 5/01/2017
+ */
 public class AdvancedCalculator {
 
-	
-	
-	
 	public AdvancedCalculator(){};
 	
+	/**
+	 * This method is used to calculate the derivative function. 
+	 * 
+	 * @param x A double input value
+	 * @param calc The input Calculator object.
+	 * @return total the Total
+	 */
 	public static double df(double x,Calculator calc){
 		
 			double total=0;
@@ -21,13 +31,20 @@ public class AdvancedCalculator {
 	
 	}
 	
+	
+	/**
+	 * This method calculates the integral using the Simpson method.
+	 * 
+	 * @param calc The input calculator object.
+	 * @return total The calculated value.
+	 */
 	public static double SimpsonIntegral(Calculator calc){
 		
 		double total=0;
 		
 		double x1=calc.a;
 		double x2=calc.b;
-		
+
 		int num=1000;
 		
 		double dx=(x2-x1)/num;
@@ -45,6 +62,13 @@ public class AdvancedCalculator {
 	}
 	
 	
+	
+	/**
+	 * This method calculates the integral using the Trapezium method.
+	 * 
+	 * @param calc The input calculator object.
+	 * @return total The calculated value.
+	 */
 	public static double trapeziumIntegral(Calculator calc){
 		
 		double total=0;
@@ -68,6 +92,13 @@ public class AdvancedCalculator {
 	
 	}
 
+	
+	/**
+	 * This method calculates the integral using the Gauss method.
+	 * 
+	 * @param calc The input calculator object.
+	 * @return total The calculated value.
+	 */
 	public static double gaussIntegral(Calculator calc) {
 		
 		double total=0;
