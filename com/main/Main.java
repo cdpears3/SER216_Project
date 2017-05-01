@@ -5,7 +5,7 @@ package com.main;
  * visualizer object
  * 
  * @author Group 12
- * @version 1.0 5/1/2017
+ * @version 2.1 5/1/2017
  *
  */
 public class Main {
