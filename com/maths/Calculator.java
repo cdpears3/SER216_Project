@@ -411,7 +411,7 @@ public class Calculator extends Renderer3D{
 
 
 	/**
-	 * This is the funcion diplayed
+	 * This is the funcion displayed
 	 * @param x
 	 * @return
 	 */
