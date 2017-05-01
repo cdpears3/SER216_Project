@@ -16,7 +16,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
-
+/**
+ * Responsible for building the choose color window
+ * 
+ * @author Group 12
+ * @version 2.1 5/1/2017 
+ *
+ */
 public class Colorpanel extends JDialog implements ActionListener{
 
 	
@@ -101,6 +107,7 @@ public class Colorpanel extends JDialog implements ActionListener{
 		
 	}
 
+	//save the selected color
 	private void save() {
 		try {
 			for(int i=0;i<selects.length;i++){
@@ -121,6 +128,12 @@ public class Colorpanel extends JDialog implements ActionListener{
 		
 	}
 	
+	/**
+	 * Responsible for handling changes in color
+	 * @author Group 12
+	 * @version 2.1
+	 *
+	 */
 	class ColorChoose extends JPanel {
 		
 		String property=null;
@@ -130,7 +143,6 @@ public class Colorpanel extends JDialog implements ActionListener{
 		JTextField textvalue=null;
 		JButton cho=null;
 		JLabel lab=null;
-		
 		
 		public ColorChoose(String property, String value) {
 			
@@ -169,12 +181,17 @@ public class Colorpanel extends JDialog implements ActionListener{
 
 		}
 		
+		/**
+		 * Writes the color to the background
+		 * @param tcc
+		 */
 		private void writeColor(Color tcc) {
 			value=decomposeColor(tcc);
 			textvalue.setBackground(buildColor(value));
 			
 		}
 
+		//getters and setters
 		public String getProperty() {
 			return property;
 		}
@@ -199,11 +216,21 @@ public class Colorpanel extends JDialog implements ActionListener{
 		
 	}
 	
+	/**
+	 * Get the RGB values of the color
+	 * @param tcc
+	 * @return string containing the RGB values
+	 */
 	public static String decomposeColor(Color tcc) {
 		return tcc.getRed()+","+tcc.getGreen()+","+tcc.getBlue();
 		
 	}
 	
+	/**
+	 * Selects the color based on the string provided
+	 * @param colorString
+	 * @return tcc
+	 */
 	public static Color buildColor(String colorString) {
 		
 		if(colorString==null) return null;
