@@ -5,6 +5,12 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.PlainDocument;
 
+/**
+ * Responsible for creating text fields to read numbers
+ * @author Group 12
+ * @version 2.1
+ *
+ */
 public class DigitTextField extends JTextField{
 
 	
