@@ -58,7 +58,7 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 	JButton less=null;
 	JButton calculateIntegral=null;
 	
-	//size of the diplay panel
+	//size of the display panel
 	public static int HEIGHT=500;
 	public static int WIDTH=800;
 	private Calculator calc;
@@ -504,7 +504,7 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 			right.setBounds(LEFTBORDER+WIDTH,UPBORDER,RIGHTBORDER,HEIGHT);
 			
 		
-			JLabel rlabel = new JLabel("Diplayed range:");
+			JLabel rlabel = new JLabel("Displayed range:");
 			rlabel.setBounds(5,60,100,20);
 			right.add(rlabel);
 			
