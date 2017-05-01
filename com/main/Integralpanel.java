@@ -16,7 +16,13 @@ import javax.swing.JTextField;
 import com.maths.AdvancedCalculator;
 import com.maths.Calculator;
 
-
+/**
+ * Builds the Integral window
+ * 
+ * @author Group 12
+ * @version 2.1
+ *
+ */
 public class Integralpanel extends JDialog implements ActionListener{
 
 	Calculator calc=null;
@@ -106,6 +112,7 @@ public class Integralpanel extends JDialog implements ActionListener{
 
 
 	/**
+	 * Caculates the integral over the selected range
 	 * @param calc2
 	 */
 	private void calculateIntegral(Calculator calc2) {
@@ -139,7 +146,7 @@ public class Integralpanel extends JDialog implements ActionListener{
 
 
 	/**
-	 * 
+	 * Recalculates the integral if the range is changed
 	 */
 	private void recalculate() {
 		calc.a=Double.parseDouble(displayedA.getText());
