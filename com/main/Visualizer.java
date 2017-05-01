@@ -48,7 +48,7 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 	public static int VISUALIZATION_STATE=CARTESIAN2D_STATE;
 	//public static int VISUALIZATION_STATE=POLAR2D_STATE;
 	
-	String VERSION="Math graphics 2.0.1 ";
+	String VERSION="Math Graphics 2.1.0 ";
 	
 	JPanel center=null;
 	JPanel bottom=null;
