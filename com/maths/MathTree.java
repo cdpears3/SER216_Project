@@ -21,7 +21,7 @@ public class MathTree {
 	public String POWER_LABEL="^";
 	public String X_LABEL="X";
 	public String Y_LABEL="Y";
-	public String TETA_LABEL="TETA";
+	public String THETA_LABEL="THETA";
 
 	public String[] FUNCTIONS={"","SQRT","SIN","COS","TAN","EXP","LOG","LN","ABS","ASIN","ACOS","ATAN","SINH","COSH","TANH"};
 
@@ -73,7 +73,7 @@ public class MathTree {
 			if(value==null || value.equals(""))
 				return 0;
 
-			if(value.equals(X_LABEL) || value.equals(TETA_LABEL))
+			if(value.equals(X_LABEL) || value.equals(THETA_LABEL))
 				return x;
 
 			if(value.equals(Y_LABEL))

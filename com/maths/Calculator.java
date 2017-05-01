@@ -56,6 +56,13 @@ public class Calculator extends Renderer3D{
 		init( WIDTH, HEIGHT);
 	}
 	
+	public double getA(){
+		return a;
+	}
+	public double getB(){
+		return b;
+	}
+	
 	public double[][] getFunction(){
 		
 		dx=(b-a)/(n-1);//incremento d'intervallo
@@ -422,7 +429,7 @@ public class Calculator extends Renderer3D{
 		
 		/*sfunction=sfunction.replaceAll("exp","esp");
 		sfunction=sfunction.replaceAll("x",sx);
-		sfunction=sfunction.replaceAll("teta",sx);
+		sfunction=sfunction.replaceAll("theta",sx);
 		sfunction=sfunction.replaceAll("esp","exp");*/
 		
 		
