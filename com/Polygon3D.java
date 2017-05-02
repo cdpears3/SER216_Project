@@ -18,23 +18,46 @@ public class Polygon3D extends Polygon{
 	
 	public double shadowCosin=1;
 
-
+	/**
+	 * Constructor for a Polygon3D object with given parameters.
+	 * @param npoints	the number of points in the polygon
+	 * @param xpoints	the x values of the polygon
+	 * @param ypoints	the y values of the polygon
+	 */
 	public Polygon3D(int npoints, int[] xpoints, int[] ypoints) {
 		super(xpoints,ypoints,npoints);
 		
 	}	
 
+	/**
+	 * Constructor for a Polygon3D object with given parameters.
+	 * @param npoints	the number of points in the polygon
+	 * @param xpoints	the x values of the polygon
+	 * @param ypoints	the y values of the polygon
+	 * @param zpoints	the z values of the polygon
+	 * @param normals	the normals of points in polygon 
+	 */
 	public Polygon3D(int npoints, int[] xpoints, int[] ypoints, int[] zpoints,Point3D[] normals) {
 		this(npoints,xpoints,ypoints,zpoints);
 		this.normals = normals;
 	}
 	
+	/**
+	 * Constructor for a Polygon3D object with given parameters.
+	 * @param npoints	the number of points in the polygon
+	 * @param xpoints	the x values of the polygon
+	 * @param ypoints	the y values of the polygon
+	 * @param zpoints	the z values of the polygon
+	 */
 	public Polygon3D(int npoints, int[] xpoints, int[] ypoints, int[] zpoints) {
 		this(npoints,xpoints,ypoints);
 		this.zpoints = zpoints;
 	}
 
-
+	/**
+	 * Constructor for a Polygon3D object with given parameters.
+	 * @param npoints	the number of points in the polygon
+	 */
 	public Polygon3D(int npoints) {
 		this.xpoints = new int[npoints];
 		this.ypoints = new int[npoints];
@@ -43,7 +66,10 @@ public class Polygon3D extends Polygon{
 		this.npoints=npoints;
 	}
 
-
+	/**
+	 * Constructor for a Polygon3D object with given parameters.
+	 * @param points	the Vector containing the points of the polygon
+	 */
 	public Polygon3D(Vector points) {
 
 		this.npoints=points.size();
@@ -66,11 +92,21 @@ public class Polygon3D extends Polygon{
 
 	}
 	
+	/**
+	 * Adds the given point to this polygon.
+	 * @param p	the point to be added
+	 */
 	public void addPoint(Point3D p) {
 		
 		addPoint((int)p.x,(int)p.y,(int)p.z);
 	}
 	
+	/**
+	 * Adds a point at with the given values to this polygon.
+	 * @param x	the x-axis value
+	 * @param y	the y-axis value
+	 * @param z	the z-axis value
+	 */
 	public void addPoint(int x, int y,int z) {
 		
 		Polygon3D new_pol=new Polygon3D(this.npoints+1);
@@ -91,17 +127,27 @@ public class Polygon3D extends Polygon{
 		
 	}
 	
+	/**
+	 * Creates a clone of this polygon.
+	 */
 	public Polygon3D clone(){
 
 		return buildTranslatedPolygon(0,0,0);
 
 	}
 
-
+	/**
+	 * Constructs and empty polygon.
+	 */
 	public Polygon3D() {
 
 	}
 	
+	/**
+	 * Divides the given polygon into triangles.
+	 * @param pol	the polygon to be divided
+	 * @return		an array containing the triangles created from the polygon
+	 */
 	public static Polygon3D[] divideIntoTriangles(Polygon3D pol){
 		
 		if(pol.npoints<3)
@@ -144,6 +190,13 @@ public class Polygon3D extends Polygon{
 		
 	}
 	
+	/**
+	 * Creates a sub polygon from this polygon.
+	 * @param pol	the polygon to extract from
+	 * @param numAngles	the number of angles in the new polygon
+	 * @param startAngle	the starting angle for the new polygon
+	 * @return	the sub polygon
+	 */
 	public static Polygon3D extractSubPolygon3D(Polygon3D pol,int numAngles,int startAngle){
 
 
@@ -168,6 +221,11 @@ public class Polygon3D extends Polygon{
 		return new_pol;
 	}
 
+	/**
+	 * Creates a polygon from a given area
+	 * @param area	the area to create the polygon
+	 * @return	the created polygon
+	 */
 	public static Polygon3D fromAreaToPolygon2D(Area area){
 
 		Polygon3D pol=new Polygon3D();
@@ -198,7 +256,11 @@ public class Polygon3D extends Polygon{
 		return pol2;
 	}
 
-
+	/**
+	 * Remove redundant points within the given polygon.
+	 * @param pol	the polygon under review
+	 * @return	a polygon with unique points
+	 */
 	private static Polygon3D removeRedundant(Polygon3D pol) {
 
 		boolean redundant=false;
@@ -227,7 +289,10 @@ public class Polygon3D extends Polygon{
 		}
 
 	}
-
+	
+	/**
+	 * String representation of this polygon.
+	 */
 	public String toString() {
 		StringBuffer sb=new StringBuffer();
 
@@ -474,6 +539,16 @@ public class Polygon3D extends Polygon{
 		return p_new;
 	}
 
+	/**
+	 * Finds the intersection of two lines.
+	 * @param p1	the ending point of the second line
+	 * @param p2	the starting point of the second line
+	 * @param x2	the starting x of the first line
+	 * @param x1	the ending x of the first line
+	 * @param y2	the starting y of the first line
+	 * @param y1	the ending y of the first line
+	 * @return		the point of intersection
+	 */
 	private static Point insersect(Point p1, Point p2, int x2, int x1, int y2, int y1) {
 
 		Line2D.Double line1=new Line2D.Double(x2,y2,x1,y1);
@@ -517,13 +592,26 @@ public class Polygon3D extends Polygon{
 		return insersection;
 	}
 
+	/**
+	 * Test if a line fits within the plane.
+	 * @param pox	the lines x
+	 * @param poy	the lines y
+	 * @param ax	the planes x
+	 * @param ay	the planes y
+	 * @return		true if it fits, false otherwise
+	 */
 	private static boolean isInsideClipPlane(int pox,int poy, int ax, int ay) {
 
 
 		return (ax*poy-ay*pox)>=0;
 	}
 
-
+	/**
+	 * Test if a polygons is faced towards the correct point.
+	 * @param pol	the polygon being tested
+	 * @param observer	the point the polygon should face
+	 * @return	true if the polygon faces the point, false otherwise
+	 */
 	public static boolean isFacing(Polygon3D pol,Point3D observer){
 
 		Point3D p0=new Point3D(pol.xpoints[0],pol.ypoints[0],pol.zpoints[0]);
@@ -538,6 +626,11 @@ public class Polygon3D extends Polygon{
 		return cosin>=0;
 	}
 	
+	/**
+	 * Finds the normal point of the given polygon.
+	 * @param pol	the polygon being tested
+	 * @return		the normal point
+	 */
 	public static Point3D findNormal(Polygon3D pol){
 
 		Point3D p0=new Point3D(pol.xpoints[0],pol.ypoints[0],pol.zpoints[0]);
@@ -557,7 +650,12 @@ public class Polygon3D extends Polygon{
 		return normal;
 	}
 
-
+	/**
+	 * Tests if a point exists within a polygon.
+	 * @param x	the x value of the point
+	 * @param y	the y value of the point
+	 * @return	true if the point exists, false otherwise
+	 */
 	public boolean hasInsidePoint(double x,double y){
 
 		for(int i=0;i<npoints;i++){
@@ -617,7 +715,10 @@ public class Polygon3D extends Polygon{
 
 
 	}
-
+	
+	/**
+	 * The main method of Polygon3D
+	 */
 	public static void main(String[] args) {
 
 		int[] cx=new int[4];
@@ -669,7 +770,13 @@ public class Polygon3D extends Polygon{
 		System.out.println(p3);
 	}
 	
-	
+	/**
+	 * Builds a polygon starting at a new location.
+	 * @param dx	the x value to be added to the current starting x
+	 * @param dy	the y value to be added to the current starting y
+	 * @param dz	the z value to be added to the current starting z
+	 * @return		the newly positioned polygon
+	 */
 	public Polygon3D buildTranslatedPolygon(double dx,double dy,double dz){
 
 		Polygon3D translatedPolygon=new Polygon3D(this.npoints);
@@ -686,6 +793,12 @@ public class Polygon3D extends Polygon{
 
 	}
 	
+	/**
+	 * Moves this polygon to a new location.
+	 * @param dx	the x value to add to this polygon's starting x
+	 * @param dy	the y value to add to this polygon's starting y
+	 * @param dz	the z value to add to this polygon's starting z
+	 */
 	public void translate(double dx,double dy,double dz){
 
 
@@ -700,6 +813,10 @@ public class Polygon3D extends Polygon{
 
 	}
 	
+	/**
+	 * Inverts this polygon.
+	 * @param y0	the y value needed to invert the polygon
+	 */
 	public void invertY(int y0) {		
 	
 
@@ -712,6 +829,13 @@ public class Polygon3D extends Polygon{
 		
 	}
 	
+	/**
+	 * Builds a polygon that represents a prism
+	 * @param upperBase	the upper boundary of the prism
+	 * @param lowerBase	the lower boundary of the prism
+	 * @param i
+	 * @return	the constructed prism
+	 */
 	public static Polygon3D buildPrismIFace(Polygon3D upperBase,Polygon3D lowerBase,int i){
 
 		int n=upperBase.npoints;
@@ -748,53 +872,100 @@ public class Polygon3D extends Polygon{
 	}
 	
 	 
-
+	/**
+	 * Returns the hex value of the color as a string.
+	 * @return the hex value of the color
+	 */
 	public String getHexColor() {
 		return hexColor;
 	}
 
+	/**
+	 * Sets the color to the given hex value.
+	 * @param hexColor the new color
+	 */
 	public void setHexColor(String hexColor) {
 		this.hexColor = hexColor;
 	}
 	
+	/**
+	 * Returns the index of this element.
+	 * @return the index
+	 */
 	public int getIndex() {
 		return index;
 	}
 
+	/**
+	 * Sets the index of this element.
+	 * @param index the new index
+	 */
 	public void setIndex(int index) {
 		this.index = index;
 	}
 	
+	/**
+	 * Sets the number of points in the polygon.
+	 * @param npoints the number of points
+	 */
 	public void setNpoints(int npoints) {
 		this.npoints = npoints;
 	}
 
 
-
+	/**
+	 * Get then x values of this polygon.
+	 * @return the array of x values
+	 */
 	public int[] getXpoints() {
 		return xpoints;
 	}
 
+	/**
+	 * Set the x values of this polygon.
+	 * @param xpoints	the array of x values to be in this polygon
+	 */
 	public void setXpoints(int[] xpoints) {
 		this.xpoints = xpoints;
 	}
 
+	/**
+	 * Get then y values of this polygon.
+	 * @return the array of y values
+	 */
 	public int[] getYpoints() {
 		return ypoints;
 	}
 
+	/**
+	 * Set the y values of this polygon.
+	 * @param ypoints	the array of y values to be in this polygon
+	 */
 	public void setYpoints(int[] ypoints) {
 		this.ypoints = ypoints;
 	}
 
+	/**
+	 * Get then z values of this polygon.
+	 * @return the array of z values
+	 */
 	public int[] getZpoints() {
 		return zpoints;
 	}
 
+	/**
+	 * Set the z values of this polygon.
+	 * @param zpoints	the array of z values to be in this polygon
+	 */
 	public void setZpoints(int[] zpoints) {
 		this.zpoints = zpoints;
 	}
 
+	/**
+	 * Finds the center of the given polygon.
+	 * @param p3d the polygon being tested
+	 * @return the point at the center of the polygon
+	 */
 	public static Point3D findCentroid(Polygon3D p3d) {
 		
 		
