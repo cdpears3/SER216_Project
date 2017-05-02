@@ -38,7 +38,13 @@ import javax.swing.event.MenuListener;
 
 import com.maths.Calculator;
 
-
+/**
+ * Builds the main window
+ * 
+ * @author Group 12
+ * @version 2.1
+ *
+ */
 public class Visualizer extends JFrame implements ActionListener,KeyListener,
     MenuListener,MouseListener,MouseWheelListener,MouseMotionListener, FocusListener{
 	
@@ -108,7 +114,7 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 	private BufferedImage buf=null;
 	private JMenuItem jmt42;
 	
-	
+	//constructor
 	public Visualizer(){
 		
 		loadProperties();
@@ -186,7 +192,7 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 
 
 	/**
-	 * @return
+	 * Creates the menu bar at the top of the screen
 	 */
 	private void buildMenuBar() {
 		
@@ -252,7 +258,7 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 
 
 	/**
-	 * 
+	 * Builds the bottom panel below the graph
 	 */
 	private void buildBottomPanel() {
 		
@@ -302,7 +308,7 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 
 
 	/**
-	 * 
+	 * Builds the top panel above the graph
 	 */
 	private void buildUpPanel() {
 		
@@ -328,8 +334,8 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 		
 	}
 	
-	/**
-		 * 
+		/**
+		 * Builds the top panel for the Polar2D display
 		 */
 		private void buildPolarUpPanel() {
 		
@@ -356,7 +362,7 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 		}
 	
 		/**
-		 * 
+		 * Builds the top panel for the 3D display
 		 */
 		private void build3DUpPanel() {
 			
@@ -383,8 +389,8 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 		}
 		
 		/**
-			 * 
-			 */
+		 * Builds the right panel for 3D display
+		 */
 		private void build3DRightPanel() {
 			
 			right=new JPanel();
@@ -445,7 +451,7 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 
 
 	/**
-	 * @return
+	 * Builds the right panel for Cartesian 2D display
 	 */
 	private void buildRightPanel() {
 		
@@ -494,8 +500,8 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 	}
 	
 	
-	/**
-		 * @return
+		/**
+		 * Build right panel for Polar2D display
 		 */
 		private void buildPolarRightPanel() {
 		
@@ -532,7 +538,9 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 			displayedA.setText(""+calc.a);
 			displayedB.setText(""+calc.b);
 		}
-
+    /**
+    * Build the graph panel and draw the graph
+    */
     public void draw(){
     	
     	draw(getGraphics2D());
@@ -603,7 +611,7 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 	}
 	
 	/**
-	 * 
+	 * Read the range values for a and b
 	 */
 	private void readRange() {
 		double a=Double.parseDouble(displayedA.getText());
@@ -652,7 +660,7 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 	
 
 	/**
-	 * 
+	 * Clear the graph
 	 */
 	private void clean(Graphics2D g2d) {
 		g2d.setColor(center.getBackground());
@@ -662,7 +670,7 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 
 
 	/**
-	 * 
+	 * Draw the axes
 	 */
 	public void initialize() {
 		
@@ -673,6 +681,10 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 		
 	}
 	
+	/**
+	*Loads saved properties from the "mathgraphics.properties"
+	*file
+	*/
 	public void loadProperties(){
 		
 		p=new Properties();
@@ -796,7 +808,9 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 
 
 
-
+	/**
+	 * Saves the graph image
+	 */
 	private void saveImage() {
 		
 		
@@ -817,6 +831,10 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 		
 	}
 	
+	/**
+	 * Save image to a specified file
+	 * @param file	name of file the image is saved to
+	 */
 	private void saveImage(File file) {
 		
 		//drawFace();
@@ -855,7 +873,7 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 
 
 	/**
-	 * 
+	 * Creates a colorpanel and sets the colors
 	 */
 	private void selectColors() {
 		
@@ -866,7 +884,11 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 	}
 
 
-
+	/**
+	 * Sets the background colors and gets the initial colors
+	 * from setInitColors()
+	 * @param p2	color properties
+	 */
 	private void setColors(Properties p2) {
 		
 		setInitColors(p2);
@@ -879,6 +901,10 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 		repaint();
 	}
 	
+	/**
+	 * Set the initial colors
+	 * @param p2	color properties
+	 */
 	private void setInitColors(Properties p2) {
 
 		if(p2.getProperty("BACKGROUND_COLOR")!=null){
@@ -932,7 +958,7 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 
 
 	/**
-	 * 
+	 * Exit the program
 	 */
 	private void exit() {
 		dispose();
@@ -943,7 +969,7 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 
 
 	/**
-	 * 
+	 * Zoom in on the graph
 	 */
 	private void zoom(int i) {
 		calc.zoom(i);
@@ -1045,7 +1071,7 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 
 
 	/**
-	 * 
+	 * Move up/down
 	 */
 	private void up(int signum) {
 		calc.up(signum);
@@ -1054,7 +1080,7 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 	}
 
 	/**
-	 * 
+	 * Move left/right
 	 */
 	private void left(int signum) {
 		calc.left(signum);
@@ -1063,7 +1089,8 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 	}
 
 	/**
-	 * 
+	 * Calculate integral under the range obtained
+	 * from readRange()
 	 */
 	private void calculateIntegral() {
 		
