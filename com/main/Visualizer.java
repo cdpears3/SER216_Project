@@ -1102,6 +1102,7 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 
 
 	/**
+	 * Displays error message window
 	 * @param string    
 	 */
 	public void error(String string) {
@@ -1129,7 +1130,9 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 
 
 
-
+	/**
+	* Changes the center of the graph to the click point
+	*/
 	public void mouseClicked(MouseEvent arg0) {
 		
 		Point point = arg0.getPoint();
@@ -1142,7 +1145,10 @@ public class Visualizer extends JFrame implements ActionListener,KeyListener,
 		if(point.x<BORDER_LIMIT) left(+1);
 		if(point.x>pannel.getWidth()-BORDER_LIMIT) left(-1);*/
 	}
-
+	
+	/**
+	* Calculates the new center of the graph window and redraws
+	*/
 	private void movetToCenter(int x, int y) {
 		
 		calc.moveCenter(WIDTH/2-x,HEIGHT/2-(HEIGHT-y));
