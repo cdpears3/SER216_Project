@@ -63,10 +63,19 @@ public class Renderer3D {
 	public double sinphi=Math.sin(phi);
 	public double cosphi=Math.cos(phi);
 	private boolean isEditor=false;
+	
+	/**
+	 *	Check if this is the editor.
+	 * @return returns true if this is editor, false otherwise
+	 */
 	public boolean isEditor() {
 		return isEditor;
 	}
 
+	/**
+	 * Sets this renderer as the editor.
+	 * @param isEditor boolean that confirms this renderer is the editor
+	 */
 	public void setEditor(boolean isEditor) {
 		this.isEditor = isEditor;
 	}
@@ -74,7 +83,11 @@ public class Renderer3D {
 
 	private static int quickAnimation=0;//time for animations
 	
-	
+	/**
+	 * Initializes the buffer of the given size.
+	 * @param WIDTH	 width of image being buffered
+	 * @param HEIGHT height of image being buffered
+	 */
 	public void init(int WIDTH,int HEIGHT){
 
 
@@ -91,6 +104,10 @@ public class Renderer3D {
 		
 	}
 	
+	/**
+	 * Sets points from given array of points.
+	 * @param ds the array of points
+	 */
 	public void init(Point3D[] ds) {
 		for(int i=0;i<ds.length;i++){
 
@@ -99,6 +116,11 @@ public class Renderer3D {
 
 	}
 	
+	/**
+	 * Builds the screen for the user.
+	 * @param buf the image being buffered
+	 * @param zbuffer2 array of buffers to build screen
+	 */
 	public void buildScreen(BufferedImage buf, ZBuffer[] zbuffer2) {
 
 		backRgb=Visualizer.BACKGROUND_COLOR.getRGB();
@@ -117,6 +139,9 @@ public class Renderer3D {
 
 	}
 	
+	/**
+	 * Builds a new ZBuffer.
+	 */
 	public void buildNewZBuffer() {
 
 		backRgb=Visualizer.BACKGROUND_COLOR.getRGB();
@@ -130,7 +155,15 @@ public class Renderer3D {
 	}
 
 	
-
+	/**
+	 * Decompose Polygon into triangles for edge walking.
+	 * @param p3d	
+	 * @param color	
+	 * @param zbuffer	
+	 * @param xDirection	
+	 * @param yDirection
+	 * @param origin
+	 */
 	public void decomposeClippedPolygonIntoZBuffer(Polygon3D p3d,Color color,ZBuffer[] zbuffer,
 			Point3D xDirection,Point3D yDirection,Point3D origin){
 
@@ -606,6 +639,7 @@ public class Renderer3D {
 
 	}
 	
+
 	private static Point3D getNormal(int position, LineData ld,
 			Vector points) {
 
@@ -625,7 +659,14 @@ public class Renderer3D {
 	float[] hsbColor=new float[3];
 	
 
-	
+	/**
+	 * Calculates a darker version of the color.
+	 * @param nx	the x position of the color
+	 * @param ny	the y position of the color
+	 * @param nz	the z position of the color
+	 * @param color	the color being darkened
+	 * @return	a darkened version of the color
+	 */
 	private int calculateShadowColor(double nx,double ny,double nz, Color color) {
 
         int argbs=color.getRGB();
@@ -645,6 +686,16 @@ public class Renderer3D {
 
 	}
 	
+	/**
+	 * Creates a new line.
+	 * @param x1	the starting x value
+	 * @param y1	the starting y value
+	 * @param z1	the starting z value
+	 * @param x2	the ending x value
+	 * @param y2	the ending y value
+	 * @param z2	the ending z value
+	 * @return	the line from starting point to ending point
+	 */
 	public Line2D.Double newLine(double x1,double y1,double z1,double x2,double y2,double z2){
 		double xx1=calcAssX(x1,y1,z1);
 		double yy1=calcAssY(x1,y1,z1);
@@ -653,10 +704,17 @@ public class Renderer3D {
 		return new Line2D.Double(xx1,yy1,xx2,yy2);	
 	}
 
+	/**
+	 * Creates a new line.
+	 * @param p1	the starting point of the line
+	 * @param p2	the ending point of the line
+	 * @return		the new line from starting point to ending point
+	 */
 	public Line2D.Double newLine(Point3D p1,Point3D p2){
 
 		return newLine(p1.z,p1.x,p1.y,p2.z,p2.x,p2.y);	
 	}
+	
 	
 	public double calcAssX(Point3D p){
 
@@ -680,12 +738,19 @@ public class Renderer3D {
 			return HEIGHT-((z-x*cosAlfa)+y0);
 	}
 	
+	/**
+	 * Move the current x0 and y0 by 10 times the given values.
+	 * @param i	the value to move x
+	 * @param j	the value to move y
+	 */
 	public void translate(int i, int j) {
 		x0=x0+10*i;
 		y0=y0+10*j;
 	}
 	
-
+	/**
+	 * Zoom out of the image.
+	 */
 	public void zoomOut(){
 		
 		deltay=deltax=deltax*1.25;
@@ -693,6 +758,9 @@ public class Renderer3D {
 		
 	}
 	
+	/**
+	 * Zoom in on the image.
+	 */
 	public void zoomIn(){
 		
 		if(deltax==0.5)
@@ -735,7 +803,9 @@ public class Renderer3D {
 		}
 		
 	}
-	
+	/**
+	 * See below method.
+	 */
 	public double[][] getRotationMatrix(Point3D versor,double theta){
 
 		return getRotationMatrix(versor.x,versor.y,versor.z,theta);
@@ -752,9 +822,6 @@ public class Renderer3D {
 	 * @param theta
 	 * @return
 	 */
-
-
-
 	public double[][] getRotationMatrix(double x,double y,double z,double theta){
 
 		double[][] matrix=new double[3][3];
@@ -796,28 +863,42 @@ public class Renderer3D {
 	}
 	
 
-
+	/**
+	 * Unused.
+	 */
 	public void reset() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Unused.
+	 */
 	public void loadFormat(Properties p) {
 		
 		
 	}
 
+	/**
+	 * Unused.
+	 */
 	public void saveFormat(PrintWriter pw) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Unused.
+	 */
 	public void buildMovements(Vector keyPressed) {
 		// TODO Auto-generated method stub
 		
 	}
 	
-	
+	/**
+	 * Rotate the image.
+	 * @param versus
+	 */
 	public void rotateView(int versus){
 		
 		if(versus>0)		
@@ -829,18 +910,34 @@ public class Renderer3D {
 		cosphi=Math.cos(phi);
 	}
 
+	/**
+	 * Gets the value of this y0.
+	 * @return the value of y0
+	 */
 	public int getY0() {
 		return y0;
 	}
 
+	/**
+	 * Sets the value of this y0.
+	 * @param y0 the new value
+	 */	 
 	public void setY0(int y0) {
 		this.y0 = y0;
 	}
-
+	
+	/**
+	 * Gets the value of this x0.
+	 * @return the value of x0
+	 */
 	public int getX0() {
 		return x0;
 	}
 
+	/**
+	 * Sets the value of this x0.
+	 * @param x0 the new value
+	 */	 
 	public void setX0(int x0) {
 		this.x0 = x0;
 	}
